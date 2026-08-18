@@ -699,40 +699,79 @@ export default function Page() {
       </section>
 
       {/* ── REVIEWS ── */}
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-24">
-        <div ref={reviewReveal.ref} className={`reveal ${reviewReveal.visible ? 'reveal-in' : ''}`}>
-          <div className="flex items-end justify-between gap-5">
+      <section className="reviews-section">
+        <div ref={reviewReveal.ref} className={`mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-24 reveal ${reviewReveal.visible ? 'reveal-in' : ''}`}>
+
+          {/* Header row */}
+          <div className="reviews-header">
             <div>
               <p className="eyebrow orange-text">07 / Social proof</p>
-              <h2 className="section-title">Rated 4.9/5 Across<br />6,200 Moves.</h2>
+              <h2 className="section-title text-white">Rated 4.9/5 Across<br />6,200 Moves.</h2>
             </div>
-            <div className="flex gap-2">
-              <button className="icon-button" aria-label="Previous review" onClick={prevReview}><ChevronLeft size={18} /></button>
-              <button className="icon-button" aria-label="Next review" onClick={nextReview}><ChevronRight size={18} /></button>
+            {/* Aggregate badge */}
+            <div className="reviews-badge">
+              <div className="flex gap-1">
+                {[1,2,3,4,5].map(x => <Star key={x} size={18} fill="#f97316" className="text-orange" />)}
+              </div>
+              <p className="reviews-badge-score">4.9 <span>/5</span></p>
+              <p className="reviews-badge-count">6,200+ verified moves</p>
             </div>
           </div>
-          <div className="carousel-viewport mt-12">
-            <div className="carousel-track" style={{ transform: `translateX(calc(-${review} * (100% / ${cardsVisible})))`, width: `calc(100% * ${reviews.length} / ${cardsVisible})` }}>
+
+          {/* Main slider area */}
+          <div className="reviews-slider mt-12">
+            {/* Featured active card */}
+            <div className="reviews-featured">
               {reviews.map(([initials, name, detail, q], i) => (
-                <article key={name} className={`carousel-card review-card ${i === review ? 'review-active' : ''}`} style={{ minWidth: `calc(100% / ${cardsVisible})`, maxWidth: `calc(100% / ${cardsVisible})`, flexShrink: 0 }}>
-                  <div className="flex gap-1 text-orange">
-                    {[1,2,3,4,5].map(x => <Star key={x} size={14} fill="currentColor" className="transition-transform duration-150 hover:scale-125" />)}
+                <div key={name} className={`rfcard ${i === review ? 'rfcard-active' : 'rfcard-hidden'}`}>
+                  {/* Big quote mark */}
+                  <div className="rfcard-quote-mark">&ldquo;</div>
+                  <p className="rfcard-text">{q as string}</p>
+                  <div className="rfcard-author">
+                    <span className="rfcard-avatar">{initials as string}</span>
+                    <div>
+                      <b className="rfcard-name">{name as string}</b>
+                      <p className="rfcard-detail">{detail as string}</p>
+                    </div>
+                    <div className="rfcard-stars">
+                      {[1,2,3,4,5].map(x => <Star key={x} size={13} fill="#f97316" className="text-orange" />)}
+                    </div>
                   </div>
-                  <p className="mt-7 text-lg font-semibold leading-7">&quot;{q}&quot;</p>
-                  <div className="mt-8 flex items-center gap-3">
-                    <span className="avatar">{initials}</span>
-                    <div><b className="text-sm">{name}</b><p className="mt-1 text-xs text-muted">{detail}</p></div>
+                </div>
+              ))}
+            </div>
+
+            {/* Side thumbnails */}
+            <div className="reviews-thumbs">
+              {reviews.map(([initials, name, detail, q], i) => (
+                <button
+                  key={name}
+                  onClick={() => setReview(i)}
+                  className={`rthumb ${i === review ? 'rthumb-active' : ''}`}
+                >
+                  <span className="rthumb-avatar">{initials as string}</span>
+                  <div className="rthumb-text">
+                    <b>{name as string}</b>
+                    <p>{detail as string}</p>
+                    <p className="rthumb-snippet">"{(q as string).slice(0, 55)}…"</p>
                   </div>
-                </article>
+                </button>
               ))}
             </div>
           </div>
-          <div className="mt-6 flex justify-center gap-2">
-            {Array.from({ length: reviews.length - cardsVisible + 1 }, (_, i) => (
-              <button key={i} aria-label={`Review ${i + 1}`} onClick={() => setReview(i)}
-                className={`carousel-dot ${i === review ? 'carousel-dot-active' : ''}`} />
-            ))}
+
+          {/* Nav arrows + dots */}
+          <div className="reviews-nav">
+            <button className="icon-button" aria-label="Previous review" onClick={prevReview}><ChevronLeft size={18} /></button>
+            <div className="flex gap-2">
+              {reviews.map((_, i) => (
+                <button key={i} aria-label={`Review ${i + 1}`} onClick={() => setReview(i)}
+                  className={`carousel-dot ${i === review ? 'carousel-dot-active' : ''}`} />
+              ))}
+            </div>
+            <button className="icon-button" aria-label="Next review" onClick={nextReview}><ChevronRight size={18} /></button>
           </div>
+
         </div>
       </section>
 
