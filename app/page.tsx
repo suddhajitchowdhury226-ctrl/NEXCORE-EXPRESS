@@ -624,40 +624,51 @@ export default function Page() {
 
       {/* ── APP ── */}
       <section id="app" className="mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-24">
-        <div ref={appReveal.ref} className={`max-w-2xl reveal ${appReveal.visible ? 'reveal-in' : ''}`}>
-          <p className="eyebrow orange-text">05 / Coming soon</p>
-          <h2 className="section-title">Our App —<br />Coming Soon.</h2>
-          <p className="mt-5 text-2xl font-bold tracking-tight text-orange">Watch it move, live.</p>
-          <p className="mt-4 max-w-md text-muted">Real-time GPS, driver details and a status timeline that updates itself.</p>
-          <div className="mt-8 flex gap-2">
-            {['Booked','Dispatched','Loading','In Transit','Delivered'].map((stage, i) => (
-              <div key={stage} className={`progress-stage ${i === 3 ? 'active' : ''}`}>
-                <span /><small>{stage}</small>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 border-t border-line pt-8">
-            <h3 className="text-2xl font-bold text-white">Be the First to Know</h3>
-            <p className="mt-3 max-w-md text-sm leading-6 text-muted">
-              Join the early-access list and we&apos;ll send you full download access as soon as it launches.
-            </p>
-            {joined ? (
-              <div className="mt-6 flex items-start gap-3 rounded-xl border border-emerald-800 bg-emerald-950/40 px-4 py-4 animate-fade-in">
-                <Check size={18} className="mt-0.5 flex-none text-emerald-400" />
-                <p className="text-sm leading-6 text-emerald-300">
-                  You&apos;re on the list. We&apos;ll notify you as soon as the NexCore Express app is ready for download.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={joinList} className="mt-6 space-y-2">
-                <div className="flex max-w-md gap-2">
-                  <input type="email" value={email} onChange={e => { setEmail(e.target.value); setEmailError('') }}
-                    placeholder="Email address" className="input flex-1" />
-                  <button type="submit" className="button-primary btn-glow">Join the List</button>
+        <div ref={appReveal.ref} className={`grid items-center gap-12 lg:grid-cols-2 reveal ${appReveal.visible ? 'reveal-in' : ''}`}>
+          {/* Left — text content */}
+          <div>
+            <p className="eyebrow orange-text">05 / Coming soon</p>
+            <h2 className="section-title">Our App —<br />Coming Soon.</h2>
+            <p className="mt-5 text-2xl font-bold tracking-tight text-orange">Watch it move, live.</p>
+            <p className="mt-4 max-w-md text-muted">Real-time GPS, driver details and a status timeline that updates itself.</p>
+            <div className="mt-8 flex gap-2">
+              {['Booked','Dispatched','Loading','In Transit','Delivered'].map((stage, i) => (
+                <div key={stage} className={`progress-stage ${i === 3 ? 'active' : ''}`}>
+                  <span /><small>{stage}</small>
                 </div>
-                {emailError && <p className="text-xs text-red-400">{emailError}</p>}
-              </form>
-            )}
+              ))}
+            </div>
+            <div className="mt-10 border-t border-line pt-8">
+              <h3 className="text-2xl font-bold text-white">Be the First to Know</h3>
+              <p className="mt-3 max-w-md text-sm leading-6 text-muted">
+                Join the early-access list and we&apos;ll send you full download access as soon as it launches.
+              </p>
+              {joined ? (
+                <div className="mt-6 flex items-start gap-3 rounded-xl border border-emerald-800 bg-emerald-950/40 px-4 py-4 animate-fade-in">
+                  <Check size={18} className="mt-0.5 flex-none text-emerald-400" />
+                  <p className="text-sm leading-6 text-emerald-300">
+                    You&apos;re on the list. We&apos;ll notify you as soon as the NexCore Express app is ready for download.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={joinList} className="mt-6 space-y-2">
+                  <div className="flex max-w-md gap-2">
+                    <input type="email" value={email} onChange={e => { setEmail(e.target.value); setEmailError('') }}
+                      placeholder="Email address" className="input flex-1" />
+                    <button type="submit" className="button-primary btn-glow">Join the List</button>
+                  </div>
+                  {emailError && <p className="text-xs text-red-400">{emailError}</p>}
+                </form>
+              )}
+            </div>
+          </div>
+          {/* Right — app UI image */}
+          <div className="app-ui-wrap">
+            <img
+              src="/ui.png"
+              alt="NexCore Express app UI preview"
+              className="app-ui-img"
+            />
           </div>
         </div>
       </section>

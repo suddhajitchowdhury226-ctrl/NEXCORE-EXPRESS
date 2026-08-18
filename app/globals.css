@@ -545,3 +545,36 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .nav-logo-img  { height: 32px; }
   .footer-logo-img { height: 40px; }
 }
+
+/* ── App UI image ────────────────────────── */
+.app-ui-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-ui-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 50% 50%, rgba(249,115,22,0.12) 0%, transparent 70%);
+  border-radius: 32px;
+  pointer-events: none;
+}
+.app-ui-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid rgba(249,115,22,0.2);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: float-b 7s ease-in-out infinite;
+}
+.app-ui-img:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 40px rgba(249,115,22,0.15);
+}
+@media (max-width: 1023px) {
+  .app-ui-img { max-width: 100%; }
+}
