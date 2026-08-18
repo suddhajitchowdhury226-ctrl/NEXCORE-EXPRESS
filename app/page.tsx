@@ -530,17 +530,32 @@ export default function Page() {
                 </circle>
                 {/* Destination — Ottawa */}
                 <circle cx="520" cy="80" r="6" fill="#94a3b8" />
-                {/* Animated glowing truck dot */}
-                <circle r="10" fill="#f97316" filter="url(#dot-glow)">
-                  <animateMotion dur="7s" repeatCount="indefinite" keyTimes="0;0.45;0.55;1" keySplines="0.4 0 0.6 1;0 0 1 1;0.4 0 0.6 1" calcMode="spline">
+                {/* Animated truck icon along route */}
+                <g>
+                  <animateMotion dur="7s" repeatCount="indefinite" keyTimes="0;0.45;0.55;1" keySplines="0.4 0 0.6 1;0 0 1 1;0.4 0 0.6 1" calcMode="spline" rotate="auto">
                     <mpath href="#route-path" />
                   </animateMotion>
-                </circle>
-                <circle r="5" fill="white" opacity="0.9">
-                  <animateMotion dur="7s" repeatCount="indefinite" keyTimes="0;0.45;0.55;1" keySplines="0.4 0 0.6 1;0 0 1 1;0.4 0 0.6 1" calcMode="spline">
-                    <mpath href="#route-path" />
-                  </animateMotion>
-                </circle>
+                  {/* Outer glow halo */}
+                  <circle r="22" fill="#f97316" opacity="0.15" filter="url(#dot-glow)" />
+                  {/* Orange badge background */}
+                  <rect x="-18" y="-13" width="36" height="26" rx="7" fill="#f97316" filter="url(#dot-glow)" />
+                  {/* Truck body — cargo section */}
+                  <rect x="-14" y="-6" width="18" height="11" rx="2" fill="white" />
+                  {/* Truck cab */}
+                  <rect x="4" y="-9" width="10" height="14" rx="2" fill="white" />
+                  {/* Windshield */}
+                  <rect x="5.5" y="-7.5" width="6.5" height="5" rx="1" fill="#f97316" />
+                  {/* Wheels */}
+                  <circle cx="-8" cy="6" r="3.5" fill="#0a0f1c" />
+                  <circle cx="-8" cy="6" r="1.8" fill="#f97316" />
+                  <circle cx="9"  cy="6" r="3.5" fill="#0a0f1c" />
+                  <circle cx="9"  cy="6" r="1.8" fill="#f97316" />
+                  {/* Pulsing ring */}
+                  <circle r="26" fill="none" stroke="#f97316" strokeWidth="1.5" opacity="0.4">
+                    <animate attributeName="r" values="18;30;18" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
+                  </circle>
+                </g>
               </svg>
               <span className="city city-a">Toronto, ON</span>
               <span className="city city-b">Ottawa, ON</span>
