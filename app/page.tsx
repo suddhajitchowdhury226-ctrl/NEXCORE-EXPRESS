@@ -701,9 +701,9 @@ export default function Page() {
             </div>
           </div>
           <div className="carousel-viewport mt-12">
-            <div className="carousel-track" style={{ transform: `translateX(calc(-${review} * (100% / ${cardsVisible})))` }}>
+            <div className="carousel-track" style={{ transform: `translateX(calc(-${review} * (100% / ${cardsVisible})))`, width: `calc(100% * ${reviews.length} / ${cardsVisible})` }}>
               {reviews.map(([initials, name, detail, q], i) => (
-                <article key={name} className={`carousel-card review-card ${i === review ? 'review-active' : ''}`} style={{ minWidth: `calc(100% / ${cardsVisible})` }}>
+                <article key={name} className={`carousel-card review-card ${i === review ? 'review-active' : ''}`} style={{ minWidth: `calc(100% / ${cardsVisible})`, maxWidth: `calc(100% / ${cardsVisible})`, flexShrink: 0 }}>
                   <div className="flex gap-1 text-orange">
                     {[1,2,3,4,5].map(x => <Star key={x} size={14} fill="currentColor" className="transition-transform duration-150 hover:scale-125" />)}
                   </div>
