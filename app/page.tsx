@@ -271,9 +271,12 @@ export default function Page() {
       {/* ── NAV ── */}
       <header className="sticky top-0 z-50 border-b border-line bg-ink/95 backdrop-blur">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Main navigation">
-          <a href="#top" className="nav-logo flex items-center gap-3 font-mono text-sm font-bold tracking-tight text-white">
-            <span className="logo-icon grid size-8 place-items-center rounded-lg bg-orange text-ink"><Package size={17} /></span>
-            NEXCORE <span className="text-orange">/</span> EXPRESS
+          <a href="#top" className="nav-logo flex items-center">
+            <img
+              src="/Vibrant motion logo for NexCore Express (1).png"
+              alt="NexCore Express"
+              className="nav-logo-img"
+            />
           </a>
           <div className="hidden items-center gap-7 text-sm text-muted md:flex">
             {['#services','#fleet','#tracking','#why','#app','#contact'].map((href, i) => (
@@ -726,9 +729,12 @@ export default function Page() {
       <footer className="section-dark" id="footer">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] lg:px-8">
           <div>
-            <a href="#top" className="flex items-center gap-3 font-mono text-sm font-bold text-white">
-              <span className="grid size-8 place-items-center rounded-lg bg-orange text-ink"><Package size={17} /></span>
-              NEXCORE / EXPRESS
+            <a href="#top" className="flex items-center">
+              <img
+                src="/Vibrant motion logo for NexCore Express (1).png"
+                alt="NexCore Express"
+                className="footer-logo-img"
+              />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-6 text-muted">NexCore Express Ltd. — Moving and logistics across Canada and the United States.</p>
           </div>

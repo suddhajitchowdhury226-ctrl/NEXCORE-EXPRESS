@@ -517,3 +517,32 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .scroll-indicator { display: none; }
   .orb-1, .orb-2 { display: none; }
 }
+
+/* ── Logo images ─────────────────────────── */
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.nav-logo:hover .nav-logo-img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.footer-logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: opacity 0.2s;
+}
+.footer-logo-img:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+  .nav-logo-img  { height: 32px; }
+  .footer-logo-img { height: 40px; }
+}
