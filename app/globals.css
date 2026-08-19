@@ -519,7 +519,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 
 /* ── Logo images ─────────────────────────── */
 .nav-logo-img {
-  height: 56px;
+  height: 80px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -542,7 +542,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 640px) {
-  .nav-logo-img  { height: 44px; }
+  .nav-logo-img  { height: 64px; }
   .footer-logo-img { height: 40px; }
 }
 
