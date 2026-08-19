@@ -268,35 +268,63 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden">
 
-      {/* ── NAV ── */}
-      <header className="sticky top-0 z-50 border-b border-line bg-ink/95 backdrop-blur">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Main navigation">
-          <a href="#top" className="nav-logo flex items-center">
-            <img
-              src="/Vibrant motion logo for NexCore Express (1).png"
-              alt="NexCore Express"
-              className="nav-logo-img"
-            />
-          </a>
-          <div className="hidden items-center gap-7 text-sm text-muted md:flex">
-            {['#services','#fleet','#tracking','#why','#app','#contact'].map((href, i) => (
-              <a key={href} href={href} className="nav-link">{['Services','Fleet','Tracking','Why NexCore','App','Contact'][i]}</a>
-            ))}
+      {/* ── HEADER ── */}
+      <header className="sticky top-0 z-50">
+
+        {/* Top info bar */}
+        <div className="topbar hidden md:flex">
+          <div className="mx-auto flex max-w-7xl w-full items-center justify-between px-5 lg:px-8">
+            <div className="flex items-center gap-6 text-xs text-muted">
+              <a href="tel:+18006392673" className="topbar-link flex items-center gap-2">
+                <Phone size={12} className="text-orange" />
+                +1 (800) NEX-CORE
+              </a>
+              <a href="mailto:hello@nexcoreexpress.com" className="topbar-link flex items-center gap-2">
+                <Package size={12} className="text-orange" />
+                hello@nexcoreexpress.com
+              </a>
+              <span className="flex items-center gap-2">
+                <MapPin size={12} className="text-orange" />
+                Toronto, ON · Vancouver · Calgary · Ottawa
+              </span>
+            </div>
+            <a href="#quote" className="topbar-cta btn-glow">
+              Get a Quote <ArrowRight size={13} />
+            </a>
           </div>
-          <a href="#quote" className="hidden rounded-full bg-orange px-5 py-2.5 text-sm font-bold text-ink btn-glow md:block">
-            Get a Quote
-          </a>
-          <button className="text-white md:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <X /> : <Menu />}
-          </button>
+        </div>
+
+        {/* Main nav */}
+        <nav className="main-nav" aria-label="Main navigation">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 lg:px-8">
+            <a href="#top" className="nav-logo flex items-center">
+              <img
+                src="/Vibrant motion logo for NexCore Express (1).png"
+                alt="NexCore Express"
+                className="nav-logo-img"
+              />
+            </a>
+            <div className="hidden items-center gap-9 md:flex">
+              {['#services','#fleet','#tracking','#why','#app','#contact'].map((href, i) => (
+                <a key={href} href={href} className="nav-link">{['Services','Fleet','Tracking','Why NexCore','App','Contact'][i]}</a>
+              ))}
+            </div>
+            <button className="text-white md:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
         </nav>
+
+        {/* Mobile menu */}
         {menuOpen && (
-          <div className="flex flex-col gap-5 border-t border-line px-5 py-5 text-sm text-white md:hidden">
+          <div className="mobile-menu flex flex-col gap-5 border-t border-line px-5 py-5 text-sm text-white md:hidden">
             {['#services','#tracking','#why','#app','#contact'].map((href, i) => (
               <a key={href} href={href} onClick={() => setMenuOpen(false)}>{['Services','Tracking','Why NexCore','App','Contact'][i]}</a>
             ))}
+            <a href="#quote" className="topbar-cta btn-glow w-fit">Get a Quote <ArrowRight size={13} /></a>
           </div>
         )}
+
       </header>
 
       {/* ── HERO ── */}

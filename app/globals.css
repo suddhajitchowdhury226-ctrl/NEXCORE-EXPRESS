@@ -519,7 +519,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 
 /* ── Logo images ─────────────────────────── */
 .nav-logo-img {
-  height: 40px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -542,7 +542,7 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
 }
 
 @media (max-width: 640px) {
-  .nav-logo-img  { height: 32px; }
+  .nav-logo-img  { height: 44px; }
   .footer-logo-img { height: 40px; }
 }
 
@@ -804,4 +804,62 @@ button, a, input, select { -webkit-tap-highlight-color: transparent; }
   .rfcard-text { font-size: 1rem; }
   .rfcard-stars { display: none; }
   .reviews-badge { display: none; }
+}
+
+/* ── Top info bar ────────────────────────── */
+.topbar {
+  background: #060b14;
+  border-bottom: 1px solid rgba(249,115,22,0.12);
+  padding: 9px 0;
+}
+.topbar-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.topbar-link:hover { color: white; }
+.topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--orange);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: filter .2s, transform .2s;
+}
+.topbar-cta:hover { filter: brightness(0.9); transform: translateY(-1px); color: var(--ink); }
+
+/* ── Main nav ────────────────────────────── */
+.main-nav {
+  background: rgba(10,15,28,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ── Nav links — bigger & spaced ─────────── */
+.nav-link {
+  font-size: 15px !important;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+  padding: 4px 0;
+}
+
+/* ── Mobile menu ─────────────────────────── */
+.mobile-menu {
+  background: rgba(10,15,28,0.98);
+  backdrop-filter: blur(16px);
+}
+
+@media (max-width: 640px) {
+  .topbar-cta { font-size: 11px; padding: 6px 12px; }
 }
