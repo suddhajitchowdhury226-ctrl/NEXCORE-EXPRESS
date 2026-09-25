@@ -22,6 +22,7 @@ import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ResidentialMovingRouteImport } from './routes/residential-moving'
 import { Route as ServiceAreasRouteImport } from './routes/service-areas'
 import { Route as TrackRouteImport } from './routes/track'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAreasRouteImport } from './routes/admin.areas'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
@@ -101,6 +102,11 @@ const ServiceAreasRoute = ServiceAreasRouteImport.update({
 const TrackRoute = TrackRouteImport.update({
   id: '/track',
   path: '/track',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -193,6 +199,7 @@ export interface FileRoutesByFullPath {
   '/residential-moving': typeof ResidentialMovingRoute
   '/service-areas': typeof ServiceAreasRoute
   '/track': typeof TrackRoute
+  '/pricing': typeof PricingRoute
   '/admin/areas': typeof AdminAreasRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/content': typeof AdminContentRoute
@@ -222,6 +229,7 @@ export interface FileRoutesByTo {
   '/residential-moving': typeof ResidentialMovingRoute
   '/service-areas': typeof ServiceAreasRoute
   '/track': typeof TrackRoute
+  '/pricing': typeof PricingRoute
   '/admin/areas': typeof AdminAreasRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/content': typeof AdminContentRoute
@@ -253,6 +261,7 @@ export interface FileRoutesById {
   '/residential-moving': typeof ResidentialMovingRoute
   '/service-areas': typeof ServiceAreasRoute
   '/track': typeof TrackRoute
+  '/pricing': typeof PricingRoute
   '/admin/areas': typeof AdminAreasRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/content': typeof AdminContentRoute
@@ -285,6 +294,7 @@ export interface FileRouteTypes {
     | '/residential-moving'
     | '/service-areas'
     | '/track'
+    | '/pricing'
     | '/admin/areas'
     | '/admin/bookings'
     | '/admin/content'
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/residential-moving'
     | '/service-areas'
     | '/track'
+    | '/pricing'
     | '/admin/areas'
     | '/admin/bookings'
     | '/admin/content'
@@ -344,6 +355,7 @@ export interface FileRouteTypes {
     | '/residential-moving'
     | '/service-areas'
     | '/track'
+    | '/pricing'
     | '/admin/areas'
     | '/admin/bookings'
     | '/admin/content'
@@ -375,6 +387,7 @@ export interface RootRouteChildren {
   ResidentialMovingRoute: typeof ResidentialMovingRoute
   ServiceAreasRoute: typeof ServiceAreasRoute
   TrackRoute: typeof TrackRoute
+  PricingRoute: typeof PricingRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
@@ -470,6 +483,13 @@ declare module '@tanstack/react-router' {
       path: '/track'
       fullPath: '/track'
       preLoaderRoute: typeof TrackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -628,6 +648,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResidentialMovingRoute: ResidentialMovingRoute,
   ServiceAreasRoute: ServiceAreasRoute,
   TrackRoute: TrackRoute,
+  PricingRoute: PricingRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
