@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
+  AlertCircle,
   ArrowRight,
   BadgeCheck,
   ChevronLeft,
@@ -11,11 +12,13 @@ import {
   MapPin,
   PackageCheck,
   Quote as QuoteIcon,
+  RecycleIcon,
   ShieldCheck,
   ThumbsUp,
   Truck,
   Users,
   Weight,
+  Wrench,
   Zap,
 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
@@ -98,6 +101,111 @@ const REVIEWS = [
     detail: "Calgary → Seattle",
   },
 ];
+
+/* ─── Pricing data ───────────────────────────────────────────────────────── */
+
+const DELIVERY_ROWS = [
+  { service: "Local Appliance Delivery (1 appliance)", price: "$109" },
+  { service: "Local Appliance Delivery (2 appliances)", price: "$159" },
+  { service: "Additional Appliance", price: "$49" },
+  { service: "Out-of-Town Delivery", price: "Call for Quote" },
+  { service: "Same-Day Delivery", price: "+$85" },
+  { service: "Next-Day Delivery", price: "+$65" },
+];
+const KITCHEN_ROWS = [
+  { service: "Dishwasher Installation", price: "$279" },
+  { service: "Refrigerator Water Line Connection", price: "$95" },
+  { service: "Fridge Door Removal & Reinstall", price: "$69" },
+  { service: "Door Swing Reversal", price: "$89" },
+  { service: "House Door Removal & Reinstall", price: "$89" },
+  { service: "Stove / Range Installation (Electric)", price: "$179" },
+  { service: "Over-the-Range Microwave Installation", price: "$229" },
+];
+const SPECIAL_ROWS = [
+  { service: "Extra Man (Heavy Items Over 350 lbs)", price: "$195" },
+  { service: "3-Man Delivery Team", price: "$295" },
+  { service: "Basement Delivery", price: "+$75" },
+  { service: "Third Floor & Above (No Elevator)", price: "+$75/floor" },
+  { service: "Stair Carry (Per Flight)", price: "+$35" },
+  { service: "Specific Delivery Window", price: "+$95" },
+];
+const REMOVAL_ROWS = [
+  { service: "Appliance Disposal / Haul Away", price: "$55" },
+  { service: "Disconnect Existing Appliance", price: "$45" },
+  { service: "Relocate Appliance Within Home", price: "$55" },
+];
+const WASHER_ROWS = [
+  { service: "Washer Installation", price: "$119" },
+  { service: "Dryer Installation (Electric)", price: "$119" },
+  { service: "Washer & Dryer Pair Installation", price: "$199" },
+  { service: "Stackable Washer/Dryer Installation", price: "$279" },
+  { service: "LG WashTower Installation", price: "$279" },
+  { service: "Pedestal Installation", price: "$59" },
+  { service: "Unstack Washer/Dryer", price: "$79" },
+];
+const NOTES = [
+  "All deliveries include basic placement of the appliance.",
+  "Installation materials are extra unless otherwise specified.",
+  "Customer must ensure access paths are clear before delivery.",
+  "Elevator bookings are the customer's responsibility.",
+  "Appliances over 350 lbs may require additional manpower.",
+  "HST is extra on all services.",
+  "E-Transfer, Visa, Mastercard and Debit accepted.",
+];
+
+type TableAccent = "blue" | "green" | "orange";
+
+function PriceTable({
+  icon: Icon,
+  title,
+  rows,
+  accent = "blue",
+}: {
+  icon: React.ElementType;
+  title: string;
+  rows: { service: string; price: string }[];
+  accent?: TableAccent;
+}) {
+  const headerBg =
+    accent === "orange"
+      ? "bg-nex-orange"
+      : accent === "green"
+        ? "bg-nex-green"
+        : "bg-[#1e4d7b]";
+
+  return (
+    <div className="overflow-hidden border border-nex-line bg-white shadow-sm">
+      <div className={`${headerBg} flex items-center gap-3 px-4 py-3`}>
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/25">
+          <Icon className="size-4 text-white" aria-hidden="true" />
+        </div>
+        <h3 className="text-sm font-black uppercase tracking-wide text-white">{title}</h3>
+      </div>
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="bg-nex-paper">
+            <th className="px-4 py-2 text-left text-xs font-bold uppercase tracking-wider text-nex-muted">
+              Service
+            </th>
+            <th className="px-4 py-2 text-right text-xs font-bold uppercase tracking-wider text-nex-muted">
+              Price
+            </th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-nex-line">
+          {rows.map((row) => (
+            <tr key={row.service} className="hover:bg-nex-paper/60">
+              <td className="px-4 py-3 text-sm text-nex-ink">{row.service}</td>
+              <td className="px-4 py-3 text-right text-sm font-extrabold text-nex-green">
+                {row.price}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 function HomePage() {
   const navigate = useNavigate();
@@ -371,9 +479,107 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ── Appliance Pricing Section ─────────────────────────────────────── */}
+      <section className="bg-nex-paper px-5 py-20 sm:px-8 lg:py-28" id="pricing">
+        <div className="mx-auto max-w-7xl">
+          {/* Section header */}
+          <p className="eyebrow">03 / Transparent pricing</p>
+          <h2 className="section-title">Appliance Delivery, Installation &amp; Haul-Away</h2>
+          <p className="mt-4 max-w-2xl leading-7 text-nex-muted">
+            From your home to ours — we handle it all.{" "}
+            <span className="font-bold text-nex-ink">HST extra on all services.</span>
+          </p>
+
+          {/* Feature badges */}
+          <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { icon: Truck,        label: "Local & Out-of-Town Delivery" },
+              { icon: Wrench,       label: "Professional Installation" },
+              { icon: RecycleIcon,  label: "Appliance Disposal & Haul-Away" },
+              { icon: ShieldCheck,  label: "Safe & Secure Service" },
+            ].map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center gap-3 border border-nex-line bg-white p-4 text-center"
+              >
+                <div className="flex size-10 items-center justify-center rounded-full bg-nex-green">
+                  <Icon className="size-5 text-white" aria-hidden="true" />
+                </div>
+                <p className="text-xs font-black uppercase leading-snug tracking-wide text-nex-ink">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* 2-col price table grid */}
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {/* Left column */}
+            <div className="flex flex-col gap-6">
+              <PriceTable icon={Truck}       title="Delivery Services"  rows={DELIVERY_ROWS} accent="blue" />
+              <PriceTable icon={Wrench}      title="Kitchen Appliances" rows={KITCHEN_ROWS}  accent="blue" />
+              <PriceTable icon={ShieldCheck} title="Special Services"   rows={SPECIAL_ROWS}  accent="blue" />
+            </div>
+
+            {/* Right column */}
+            <div className="flex flex-col gap-6">
+              <PriceTable icon={RecycleIcon} title="Removal & Disposal"     rows={REMOVAL_ROWS} accent="green" />
+              <PriceTable icon={Wrench}      title="Washer & Dryer Services" rows={WASHER_ROWS}  accent="orange" />
+
+              {/* Important information */}
+              <div className="overflow-hidden border border-nex-line bg-white shadow-sm">
+                <div className="flex items-center gap-3 bg-[#1e4d7b] px-4 py-3">
+                  <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/25">
+                    <AlertCircle className="size-4 text-white" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-sm font-black uppercase tracking-wide text-white">
+                    Important Information
+                  </h3>
+                </div>
+                <ul className="divide-y divide-nex-line">
+                  {NOTES.map((note) => (
+                    <li key={note} className="flex items-start gap-3 px-4 py-3">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-nex-green" />
+                      <span className="text-sm text-nex-ink">{note}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap items-center gap-2 border-t border-nex-line bg-nex-paper px-4 py-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-nex-muted">
+                    We accept:
+                  </span>
+                  {["Interac", "Visa", "Mastercard", "Debit"].map((m) => (
+                    <span
+                      key={m}
+                      className="rounded border border-nex-line bg-white px-2.5 py-1 text-xs font-extrabold text-nex-ink shadow-sm"
+                    >
+                      {m}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link to="/quote" className="bg-nex-orange px-7 py-4 font-extrabold text-white">
+              Get a Quote
+              <ArrowRight className="ml-2 inline size-4" aria-hidden="true" />
+            </Link>
+            <Link
+              to="/pricing"
+              className="border border-nex-ink px-7 py-4 font-extrabold text-nex-ink hover:bg-nex-ink hover:text-white"
+            >
+              Full Pricing Page
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-nex-ink px-5 py-20 text-white sm:px-8 lg:py-28" id="tracking">
         <div className="mx-auto max-w-7xl">
-          <p className="eyebrow text-nex-lime">03 / Live tracking</p>
+          <p className="eyebrow text-nex-lime">04 / Live tracking</p>
           <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
             Watch it move, live.
           </h2>
@@ -454,7 +660,7 @@ function HomePage() {
 
       <section className="bg-nex-paper px-5 py-20 sm:px-8 lg:py-28" id="standard">
         <div className="mx-auto max-w-7xl">
-          <p className="eyebrow">04 / The NexCore standard</p>
+          <p className="eyebrow">05 / The NexCore standard</p>
           <h2 className="section-title">Why teams and families choose NexCore.</h2>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[
