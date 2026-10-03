@@ -18,11 +18,12 @@ import { Route as CommercialMovingRouteImport } from './routes/commercial-moving
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MovingServicesRouteImport } from './routes/moving-services'
+import { Route as PayRouteImport } from './routes/pay'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ResidentialMovingRouteImport } from './routes/residential-moving'
 import { Route as ServiceAreasRouteImport } from './routes/service-areas'
 import { Route as TrackRouteImport } from './routes/track'
-import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAreasRouteImport } from './routes/admin.areas'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
@@ -84,6 +85,16 @@ const MovingServicesRoute = MovingServicesRouteImport.update({
   path: '/moving-services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PayRoute = PayRouteImport.update({
+  id: '/pay',
+  path: '/pay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuoteRoute = QuoteRouteImport.update({
   id: '/quote',
   path: '/quote',
@@ -102,11 +113,6 @@ const ServiceAreasRoute = ServiceAreasRouteImport.update({
 const TrackRoute = TrackRouteImport.update({
   id: '/track',
   path: '/track',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PricingRoute = PricingRouteImport.update({
-  id: '/pricing',
-  path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -195,11 +201,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/moving-services': typeof MovingServicesRoute
+  '/pay': typeof PayRoute
+  '/pricing': typeof PricingRoute
   '/quote': typeof QuoteRoute
   '/residential-moving': typeof ResidentialMovingRoute
   '/service-areas': typeof ServiceAreasRoute
   '/track': typeof TrackRoute
-  '/pricing': typeof PricingRoute
   '/admin/areas': typeof AdminAreasRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/content': typeof AdminContentRoute
@@ -225,11 +232,12 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/moving-services': typeof MovingServicesRoute
+  '/pay': typeof PayRoute
+  '/pricing': typeof PricingRoute
   '/quote': typeof QuoteRoute
   '/residential-moving': typeof ResidentialMovingRoute
   '/service-areas': typeof ServiceAreasRoute
   '/track': typeof TrackRoute
-  '/pricing': typeof PricingRoute
   '/admin/areas': typeof AdminAreasRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/content': typeof AdminContentRoute
@@ -257,11 +265,12 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/moving-services': typeof MovingServicesRoute
+  '/pay': typeof PayRoute
+  '/pricing': typeof PricingRoute
   '/quote': typeof QuoteRoute
   '/residential-moving': typeof ResidentialMovingRoute
   '/service-areas': typeof ServiceAreasRoute
   '/track': typeof TrackRoute
-  '/pricing': typeof PricingRoute
   '/admin/areas': typeof AdminAreasRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/content': typeof AdminContentRoute
@@ -290,11 +299,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/moving-services'
+    | '/pay'
+    | '/pricing'
     | '/quote'
     | '/residential-moving'
     | '/service-areas'
     | '/track'
-    | '/pricing'
     | '/admin/areas'
     | '/admin/bookings'
     | '/admin/content'
@@ -320,11 +330,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/moving-services'
+    | '/pay'
+    | '/pricing'
     | '/quote'
     | '/residential-moving'
     | '/service-areas'
     | '/track'
-    | '/pricing'
     | '/admin/areas'
     | '/admin/bookings'
     | '/admin/content'
@@ -351,11 +362,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/faq'
     | '/moving-services'
+    | '/pay'
+    | '/pricing'
     | '/quote'
     | '/residential-moving'
     | '/service-areas'
     | '/track'
-    | '/pricing'
     | '/admin/areas'
     | '/admin/bookings'
     | '/admin/content'
@@ -383,11 +395,12 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   MovingServicesRoute: typeof MovingServicesRoute
+  PayRoute: typeof PayRoute
+  PricingRoute: typeof PricingRoute
   QuoteRoute: typeof QuoteRoute
   ResidentialMovingRoute: typeof ResidentialMovingRoute
   ServiceAreasRoute: typeof ServiceAreasRoute
   TrackRoute: typeof TrackRoute
-  PricingRoute: typeof PricingRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
@@ -457,6 +470,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MovingServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pay': {
+      id: '/pay'
+      path: '/pay'
+      fullPath: '/pay'
+      preLoaderRoute: typeof PayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/quote': {
       id: '/quote'
       path: '/quote'
@@ -483,13 +510,6 @@ declare module '@tanstack/react-router' {
       path: '/track'
       fullPath: '/track'
       preLoaderRoute: typeof TrackRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pricing': {
-      id: '/pricing'
-      path: '/pricing'
-      fullPath: '/pricing'
-      preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -644,11 +664,12 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   MovingServicesRoute: MovingServicesRoute,
+  PayRoute: PayRoute,
+  PricingRoute: PricingRoute,
   QuoteRoute: QuoteRoute,
   ResidentialMovingRoute: ResidentialMovingRoute,
   ServiceAreasRoute: ServiceAreasRoute,
   TrackRoute: TrackRoute,
-  PricingRoute: PricingRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
